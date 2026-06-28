@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>⚓ Album Kelas XI Nautika B — SMKP Bahari Kota Tegal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #0a1628;
+            font-family: 'Inter', sans-serif;
+            color: #e0e0e0;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        .hero {
+            background: linear-gradient(145deg, #0a2a4a 0%, #0d1f3c 60%, #1a3a5a 100%);
+            padding: 4rem 1.5rem 3rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 2px solid #2a4a7a;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -30%;
+            left: -20%;
+            width: 140%;
+            height: 140%;
+            background: radial-gradient(ellipse at 30% 50%, rgba(59,130,246,0.06), transparent 70%);
+            pointer-events: none;
+        }
+        .hero .anchor {
+            font-size: 4rem;
+            display: inline-block;
+            margin-bottom: 0.5rem;
+            animation: floatAnchor 3s ease-in-out infinite;
+            color: #d4af37;
+        }
+        @keyframes floatAnchor {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: #f0f4f8;
+            letter-spacing: 2px;
+            text-shadow: 0 2px 20px rgba(0,20,50,0.4);
+        }
+        .hero .sub {
+            font-size: 1.1rem;
+            color: #8ab4e0;
+            margin-top: 0.3rem;
+            letter-spacing: 1px;
+        }
+        .hero .motto {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 1.2rem;
+            color: #d4af37;
+            margin-top: 0.8rem;
+            border-top: 1px solid rgba(212,175,55,0.3);
+            display: inline-block;
+            padding-top: 0.5rem;
+        }
+        .wave {
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 60'%3E%3Cpath d='M0,30 C300,60 600,0 900,30 C1050,45 1150,30 1200,30 L1200,60 L0,60Z' fill='%230a1628'/%3E%3C/svg%3E") no-repeat bottom;
+            background-size: cover;
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 2rem 1.5rem; }
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: #f0f4f8;
+            border-left: 4px solid #d4af37;
+            padding-left: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .about-text {
+            color: #b0c4de;
+            line-height: 1.8;
+            font-size: 1rem;
+            max-width: 800px;
+        }
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+        .gallery-item {
+            overflow: hidden;
+            border-radius: 20px;
+            border: 2px solid #1a3a5a;
+            transition: 0.3s;
+            cursor: pointer;
+            background: #0f1a2e;
+            position: relative;
+        }
+        .gallery-item:hover {
+            border-color: #d4af37;
+            transform: translateY(-6px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 260px;
+            object-fit: cover;
+            display: block;
+            transition: 0.4s;
+        }
+        .gallery-item:hover img { transform: scale(1.04); }
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid #1a3a5a;
+            color: #6c86a3;
+            font-size: 0.8rem;
+        }
+        .footer span { color: #d4af37; }
+        .credit {
+            color: #6c86a3;
+            font-size: 0.7rem;
+            margin-top: 0.3rem;
+            letter-spacing: 1px;
+        }
+        .credit i { color: #d4af37; }
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.94);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+        .lightbox.active { display: flex; }
+        .lightbox img {
+            max-width: 90%;
+            max-height: 85%;
+            border-radius: 16px;
+            border: 2px solid #d4af37;
+            box-shadow: 0 0 40px rgba(212,175,55,0.2);
+        }
+        .lightbox .close {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            font-size: 2.5rem;
+            color: #d4af37;
+            cursor: pointer;
+        }
+        .comment-section {
+            margin-top: 2rem;
+        }
+        .comment-input {
+            display: flex;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+        .comment-input input {
+            flex: 1;
+            padding: 0.7rem 1rem;
+            background: #0f1a2e;
+            border: 1px solid #1a3a5a;
+            border-radius: 40px;
+            color: #fff;
+            font-family: 'Inter', sans-serif;
+        }
+        .comment-input input:focus { outline: none; border-color: #d4af37; }
+        .btn {
+            background: #d4af37;
+            color: #0a1628;
+            border: none;
+            padding: 0.7rem 1.8rem;
+            border-radius: 40px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .btn:hover { filter: brightness(1.1); transform: translateY(-2px); }
+        .comment-list {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        .comment-item {
+            background: #0f1a2e;
+            border-radius: 16px;
+            padding: 0.7rem 1rem;
+            margin-bottom: 0.6rem;
+            border-left: 3px solid #d4af37;
+        }
+        .comment-item .name { font-weight: 700; color: #d4af37; font-size: 0.8rem; }
+        .comment-item .text { font-size: 0.85rem; color: #b0c4de; margin-top: 0.2rem; }
+        .comment-item .time { font-size: 0.6rem; color: #6c86a3; margin-top: 0.2rem; }
+        .stat-foto { color: #8ab4e0; font-size: 0.9rem; margin-top: 0.5rem; }
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 480px) {
+            .gallery-grid { grid-template-columns: 1fr; }
+            .gallery-item img { height: 200px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="hero">
+    <div class="anchor">⚓</div>
+    <h1>Album Kelas XI Nautika B</h1>
+    <div class="sub">SMKP Bahari Kota Tegal — Tahun Ajaran 2025/2026</div>
+    <div class="motto">〰️ Berlayar Menuju Masa Depan 〰️</div>
+    <div class="stat-foto"><i class="fas fa-images"></i> 10 Foto</div>
+    <div class="wave"></div>
+</div>
+
+<div class="container">
+    <div class="section-title">⚓ Tentang Kelas</div>
+    <div class="about-text">
+        Kelas XI Nautika B adalah keluarga besar yang penuh semangat kebersamaan dan perjuangan. Di bawah langit biru dan deburan ombak, kami belajar tentang lautan, navigasi, dan mimpi-mimpi besar. Album ini adalah bukti perjalanan kami — penuh tawa, cerita, dan kenangan yang tak akan pernah kami lupakan. Berlayar bersama, menuju masa depan! ⚓
+    </div>
+
+    <div class="section-title" style="margin-top:2.5rem;">📸 Galeri Kenangan</div>
+    <div class="gallery-grid" id="galleryGrid"></div>
+
+    <div class="section-title" style="margin-top:2.5rem;">💬 Buku Tamu</div>
+    <div class="comment-section">
+        <div class="comment-input">
+            <input type="text" id="commentName" placeholder="Nama kamu..." value="Anonymous">
+            <input type="text" id="commentText" placeholder="Tulis komentar...">
+            <button class="btn" id="postCommentBtn"><i class="fas fa-paper-plane"></i> Kirim</button>
+        </div>
+        <div class="comment-list" id="commentList"></div>
+    </div>
+</div>
+
+<div class="footer">
+    ⚓ SMKP Bahari Kota Tegal — XI Nautika B <span>✦</span> 2025/2026
+    <div class="credit"><i class="fas fa-crown"></i> © sandi <i class="fas fa-heart" style="color:#d4af37;"></i></div>
+</div>
+
+<div class="lightbox" id="lightbox">
+    <div class="close" id="closeLb">&times;</div>
+    <img id="lbImg" src="">
+</div>
+
+<script>
+    // ==================== DATA FOTO ====================
+    const images = [
+        "https://files.catbox.moe/s0ri4g.jpg",
+        "https://files.catbox.moe/8qxrsm.jpg",
+        "https://files.catbox.moe/arz6ej.jpg",
+        "https://files.catbox.moe/4ptgqq.jpg",
+        "https://files.catbox.moe/4q27sd.jpg",
+        "https://files.catbox.moe/dyns4q.jpg",
+        "https://files.catbox.moe/q4axde.jpg",
+        "https://files.catbox.moe/axb5zx.jpg",
+        "https://files.catbox.moe/bth9f9.jpg",
+        "https://files.catbox.moe/liozq4.jpg"
+    ];
+
+    // ==================== RENDER GALERI ====================
+    const grid = document.getElementById('galleryGrid');
+    grid.innerHTML = '';
+    images.forEach((src, idx) => {
+        const div = document.createElement('div');
+        div.className = 'gallery-item';
+        const img = document.createElement('img');
+        img.src = src;
+        img.alt = `Kenangan ${idx+1}`;
+        img.loading = "eager";
+        img.onerror = function() {
+            this.src = 'https://placehold.co/400x300/1a3a5a/6c86a3?text=Foto+Tidak+Muncul';
+        };
+        div.appendChild(img);
+        div.addEventListener('click', () => openLightbox(src));
+        grid.appendChild(div);
+    });
+
+    // ==================== LIGHTBOX ====================
+    const lightbox = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lbImg');
+    function openLightbox(src) { lbImg.src = src; lightbox.classList.add('active'); }
+    document.getElementById('closeLb').addEventListener('click', () => lightbox.classList.remove('active'));
+    lightbox.addEventListener('click', (e) => { if (e.target === lightbox) lightbox.classList.remove('active'); });
+
+    // ==================== KOMENTAR GLOBAL ====================
+    let comments = JSON.parse(localStorage.getItem('album_nautika_comments')) || [];
+
+    function saveComments() {
+        localStorage.setItem('album_nautika_comments', JSON.stringify(comments));
+        renderComments();
+    }
+
+    function renderComments() {
+        const container = document.getElementById('commentList');
+        if (!container) return;
+        if (comments.length === 0) {
+            container.innerHTML = '<div style="text-align:center; padding:1rem; color:#6c86a3;">Belum ada komentar. Jadilah yang pertama! ⚓</div>';
+            return;
+        }
+        container.innerHTML = comments.map(c => `
+            <div class="comment-item">
+                <div class="name">${escapeHtml(c.name)}</div>
+                <div class="text">${escapeHtml(c.text)}</div>
+                <div class="time">${c.time}</div>
+            </div>
+        `).join('');
+    }
+
+    function escapeHtml(str) { return str.replace(/[&<>]/g, m => ({ '&':'&amp;','<':'&lt;','>':'&gt;' }[m])); }
+
+    document.getElementById('postCommentBtn').addEventListener('click', () => {
+        const nameInput = document.getElementById('commentName');
+        const textInput = document.getElementById('commentText');
+        const name = nameInput.value.trim() || 'Anonymous';
+        const text = textInput.value.trim();
+        if (!text) return alert('Tulis komentar dulu!');
+        comments.unshift({ name, text, time: new Date().toLocaleString('id-ID') });
+        saveComments();
+        textInput.value = '';
+        nameInput.value = 'Anonymous';
+    });
+
+    window.addEventListener('storage', (e) => {
+        if (e.key === 'album_nautika_comments') {
+            comments = JSON.parse(e.newValue) || [];
+            renderComments();
+        }
+    });
+    renderComments();
+</script>
+</body>
+</html>
